@@ -37,7 +37,6 @@ submit_log <- function(){
   cat("Preparando o envio ...\n")
   library(googlesheets)
   suppressMessages(library(dplyr))
-  # Please edit the link below
 
   # Do not edit the code below
 
@@ -59,13 +58,34 @@ submit_log <- function(){
   encoded_log <- base64encode(temp)
     #browseURL(paste0(pre_fill_link, encoded_log))
 
-    #  answer
-  #  input<-data.frame(Sys.time(),encoded_log)
-  #  sheet_append(input, ss=chave, sheet = "Respostas")
-  cat("Solução tempóraria para envio copie o string","\n\n")
-  cat(encoded_log,"\n\n")
-  cat("Envie no formulário https://forms.gle/yGARQSg9YwMq3b3d7")
-     return(TRUE)
+  #  answer
+  input<-data.frame(Sys.time(),encoded_log)
+  sheet_append(input, ss= chave, sheet = "Respostas")
+   return(TRUE)
+
+}
 
 
+
+# Returns TRUE if the user has calculated a value equal to that calculated by the given expression.
+calculates_same_value <- function(expr){
+  e <- get("e", parent.frame())
+  # Calculate what the user should have done.
+  eSnap <- cleanEnv(e$snapshot)
+  val <- eval(parse(text=expr), eSnap)
+  passed <- isTRUE(all.equal(val, e$val))
+  if(!passed)e$delta <- list()
+  return(passed)
+}
+
+
+readline_clean <- function(prompt = "") {
+  wrapped <- strwrap(prompt, width = getOption("width") - 2)
+  mes <- stringr::str_c("| ", wrapped, collapse = "\n")
+  message(mes)
+  readline()
+}
+
+hrule <- function() {
+  message("\n", paste0(rep("#", getOption("width") - 2), collapse = ""), "\n")
 }

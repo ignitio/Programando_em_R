@@ -231,8 +231,9 @@
   Hint: Se seu ambiente de programação não suportar auto-completar, apenas digite my_div e pressione Enter para seguir em frente.
 
 - Class: mult_question
-  Output: Você gostaria de informar alguém de que esta lição foi completada com sucesso?
-  CorrectAnswer: NULL
-  AnswerChoices: Sim; Não
-  AnswerTests: notify()
-  Hint: NULL
+  Output: Você quer enviar o log  dessa sessão?
+  AnswerChoices: Sim;Não
+  CorrectAnswer: Sim
+  AnswerTests: submit_log()
+  Hint: Type a hint.
+ 

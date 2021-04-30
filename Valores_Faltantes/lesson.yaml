@@ -1,0 +1,144 @@
+--- 
+- 
+  Author: "Nick Carchedi"
+  Class: meta
+  Course: "Programando em R"
+  Lesson: "Valores faltantes"
+  Organization: "JHU Biostat"
+  Translation: "Carlos Tonhatti"
+  Type: Standard
+  Version: "2.2.0"
+- 
+  Class: text
+  Output: "Valores faltantes são importantes na estatística e analise de dados. Frequentemente, valores faltantes não devem ser ignorados mas eles devem ser analisados com cuidado pois pode haver algum padrão ou causa."
+- 
+  Class: text
+  Output: "No R, NA é usado para representar valores \"não disponíveis\" ou  \"faltantes\". Nessa lição, nós vamos explorar estes valores um pouco mais."
+- 
+  AnswerTests: "omnitest(correctExpr='x <- c(44, NA, 5, NA)')"
+  Class: cmd_question
+  CorrectAnswer: "x <- c(44, NA, 5, NA)"
+  Hint: "Atribua o vetor c(44, NA, 5, NA) a  variável X. NA deve estar em caixa alta."
+  Output: "Qualquer operação envolvendo NA geralmente retorna NA como resultado. Para ilustrar isso, vamos criar um vetor  c(44, NA, 5, NA) e atribuir a variável x."
+- 
+  AnswerTests: "any_of_exprs('x * 3', '3 * x')"
+  Class: cmd_question
+  CorrectAnswer: "x * 3"
+  Hint: "Tente x * 3."
+  Output: "Agora, vamos multiplicar por 3."
+- 
+  Class: text
+  Output: "Veja que o elemento resultante do vetor correspondente ao valor NA também é NA."
+- 
+  AnswerTests: "omnitest(correctExpr='y <- rnorm(1000)')"
+  Class: cmd_question
+  CorrectAnswer: "y <- rnorm(1000)"
+  Hint: "A função  rnorm() gera números aleatórios a partir de uma distribuição normal. Digite y <- rnorm(1000)."
+  Output: "Para fazer as coisas um pouco mais interessante, vamos criar um vetor com 1000 sorteios seguindo uma distribuição normal com y <- rnorm(1000)."
+- 
+  AnswerTests: "omnitest(correctExpr='z <- rep(NA, 1000)')"
+  Class: cmd_question
+  CorrectAnswer: "z <- rep(NA, 1000)"
+  Hint: "Digite  z <- rep(NA, 1000)  para gerar o vetor com 1000 NAs."
+  Output: "Agora, vamos criar um vetor contendo 1000 NA com  z <- rep(NA, 1000)."
+- 
+  AnswerTests: "omnitest(correctExpr='my_data <- sample(c(y, z), 100)')"
+  Class: cmd_question
+  CorrectAnswer: "my_data <- sample(c(y, z), 100)"
+  Hint: "A função sample() sorteia uma amostra aleatória dos dados são passados como primeiro argumento (nesse caso c(y, z)) com o tamanho especificado no segundo argumento. O comando  my_data <- sample(c(y, z), 100)  irá dar o que nós queremos."
+  Output: "Agora, vamos selecionar 100 elementos aleatoriamente entre estes 2000 valores (combinando y e z) de forma que nós não saibamos quantos  NAs estarão presentes nem quais as posições em nosso vetor final. Digite  my_data <- sample(c(y, z), 100)."
+- 
+  AnswerTests: "omnitest(correctExpr='my_na <- is.na(my_data)')"
+  Class: cmd_question
+  CorrectAnswer: "my_na <- is.na(my_data)"
+  Hint: "Atribua o resultado de  is.na(my_data)  a variável my_na."
+  Output: "Vamos primeiro saber onde os NAs estão dentro do nosso vetor. A função is.na() nos diz quais elementos do vetor é NA. Digite is.na() sobre my_data e atribua o resultado a my_na."
+- 
+  AnswerTests: omnitest(correctExpr='my_na')
+  Class: cmd_question
+  CorrectAnswer: my_na
+  Hint: "Digite  my_na para ver o seu conteúdo."
+  Output: "Agora, imprima my_na para ver o que aparece."
+- 
+  Class: text
+  Output: "Todos elementos que estão marcados como TURE, em my_na, correspondem a um elemento no my_data que é NA. Do mesmo modo, os elementos marcados como FALSE, correspondem a elementos de my_data que são números sorteados da distribuição normal."
+- 
+  AnswerTests: "omnitest(correctExpr='my_data == NA')"
+  Class: cmd_question
+  CorrectAnswer: "my_data == NA"
+  Hint: "Tente my_data == NA para ver o que acontece."
+  Output: "Nas aulas passadas sobre operadores lógicos, nós introduzimos o operador \"==\" como um método para testar a igualdade entre dois objetos. Então, você pode estar pensando que a expressão  my_data == NA  gera o mesmo resultado que  is.na().  Tente isso."
+- 
+  Class: text
+  Output: "A razão pela qual você tem um vetor em que todos são  NAs é que NA não é realmente um valor, mas apenas uma palavra reservada para uma quantidade que não está disponível. Portanto, a expressão lógica é incompleta e o  R não tem escolha senão retornar um vetor do mesmo tamanho que my_data que contém todos os NAs"
+- 
+  Class: text
+  Output: "Não se preocupe se isso está um tanto confuso para você. O que você deve guardar é que você deve ser cauteloso quando usar expressões logicas quando NAs podem estar presentes. Um único valor NA pode alterar todo o resultado."
+- 
+  Class: text
+  Output: "Voltando para a tarefa. Agora que temos o vetor, my_na, que tem TRUE para todo NA e FALSE para todo valor numérico, nós podemos calcular o número total de NAs nos dados."
+- 
+  Class: text
+  Output: "O truque é conhecer como as coisas são computadas, o R representa TRUE como o número 1 e FALSE como o número 0. Então, se somarmos um monte de TRUE e FALSE, nós teremos o número total de TRUE."
+- 
+  AnswerTests: omnitest(correctExpr='sum(my_na)')
+  Class: cmd_question
+  CorrectAnswer: sum(my_na)
+  Hint: "Use sum(my_na) para contar os NAs."
+  Output: "Vamos tentar isso. Use a função sum() sobre o vetor my_na para contar o número total de TRUE no my_na, ou seja,  o número total de NAs em my_data. Não atribua este resultado a uma nova variável."
+- 
+  AnswerTests: omnitest(correctExpr='mean(my_na)')
+  Class: cmd_question
+  CorrectAnswer: mean(my_na)
+  Hint: "Use mean(my_na) para ver a proporção de NAs."
+  Output: "O mesmo raciocínio pode ser usado para saber a proporção de NAs  nos dados. Como todo NA vale 1 e valor numérico vale 0, a média aritmética no vetor my_na dá a proporção de NA. Tente isso."
+- 
+  Class: text
+  Output: "O mesmos truques servem para contar e calcular a proporção da presença de um valor, ou intervalo, dentro dos dados. Vamos utilizar o vetor y que criamos no inicio dessa aula. Lembre-se que o vetor y é composto por 1000 números aleatórios.  A função rnorm(x) amostra x números de uma distribuição normal com média igual a zero e desvio padrão igual a 1."
+- 
+  AnswerTests: omnitest(correctExpr='Maior_que_media<-y>0')
+  Class: cmd_question
+  CorrectAnswer: Maior_que_media<-y>0
+  Hint: "Digite Maior_que_media<- y>0."
+  Output: "Primeiro, vamos perguntar quais são os valores que estão acima da média e atribuir a um vetor Maior_que_media."
+- 
+  AnswerTests: "omnitest(correctExpr=' sum(Maior_que_media)')"
+  Class: cmd_question
+  CorrectAnswer: sum(Maior_que_media)
+  Hint: "Digite  sum(Maior_que_media)."
+  Output: "Agora conte o número de valores acima da média."
+- 
+  AnswerTests: "omnitest(correctExpr=' mean(Maior_que_media)')"
+  Class: cmd_question
+  CorrectAnswer: mean(Maior_que_media)
+  Hint: "Digite  mean(Maior_que_media)."
+  Output: "Agora estime a proporção dos valores acima da média."
+- 
+  Class: text
+  Output: "Em uma amostragem  de uma distribuição normal espera-se que metade dos elementos sejam maiores que a média, ou seja, a proporção deve ser próximo a 0.5."
+- 
+  AnswerTests: omnitest(correctExpr='my_data')
+  Class: cmd_question
+  CorrectAnswer: my_data
+  Hint: "Imprima  my_data no console."
+  Output: "Legal né! Finalmente, vamos dar uma olhada nos dados para nos convencer de que tudo faz sentido. Imprimir my_data no console"
+- 
+  AnswerTests: omnitest(correctExpr='0/0')
+  Class: cmd_question
+  CorrectAnswer: 0/0
+  Hint: "Digite 0/0."
+  Output: "Agora que já vimos os NAs vamos dar uma olhada em um segundo tipo de valor faltante -- NaN, o que significa \"Não é um número, tente dividir 0 por 0 (0/0)"
+- 
+  AnswerTests: "omnitest(correctExpr='Inf - Inf')"
+  Class: cmd_question
+  CorrectAnswer: "Inf - Inf"
+  Hint: "Digite Inf - Inf. Você pode imaginar o resultado?"
+  Output: "Agora mais uma vez, No R, Inf significa infinito. O que acontece quando você subtrair Inf de Inf?"
+- 
+  AnswerChoices: Sim;Não
+  AnswerTests: submit_log()
+  Class: mult_question
+  CorrectAnswer: Sim
+  Hint: "Type a hint."
+  Output: "Você quer enviar o log  dessa sessão?"
+

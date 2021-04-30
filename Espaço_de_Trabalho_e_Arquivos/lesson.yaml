@@ -200,10 +200,11 @@
 - Class: text
   Output: "Nesta lição você aprendeu a examinar o seu espaço de trabalho em R e a trabalhar com o sistema de arquivos da sua máquina dentro do R. Obrigado por jogar!."
   
+ 
+
 - Class: mult_question
-  Output: "Você gostaria de informar alguém de que esta lição foi completada com sucesso?"
-  CorrectAnswer: NULL
-  AnswerChoices: Sim; Não
-  AnswerTests: notify()
-  Hint: NULL
-  
+  Output: Voce quer enviar o log  dessa sessão?
+  AnswerChoices: Sim;Não
+  CorrectAnswer: Sim
+  AnswerTests: submit_log()
+  Hint: Type a hint.

@@ -35,9 +35,10 @@ submit_log <- function(){
         return(TRUE)  }
 
   cat("Preparando o envio ...\n")
-  library(googlesheets)
+  library(googlesheets4)
   suppressMessages(library(dplyr))
-  # Please edit the link below
+
+
 
   # Do not edit the code below
 
@@ -57,15 +58,15 @@ submit_log <- function(){
                         stringsAsFactors = FALSE)
   write.csv(log_tbl, file = temp, row.names = FALSE)
   encoded_log <- base64encode(temp)
-    #browseURL(paste0(pre_fill_link, encoded_log))
 
-    #  answer
-  #  input<-data.frame(Sys.time(),encoded_log)
-  #  sheet_append(input, ss=chave, sheet = "Respostas")
-  cat("Solução tempóraria para envio copie o string","\n\n")
-  cat(encoded_log,"\n\n")
-  cat("Envie no formulário https://forms.gle/yGARQSg9YwMq3b3d7")
-     return(TRUE)
+  #  answer
+#  input<-data.frame(Sys.time(),encoded_log)
+#  sheet_append(input, ss=chave, sheet = "Respostas")
+cat("Solução tempóraria para envio copie o string","\n\n")
+cat(encoded_log,"\n\n")
+cat("Envie no formulário https://forms.gle/yGARQSg9YwMq3b3d7")
 
+
+   return(TRUE)
 
 }

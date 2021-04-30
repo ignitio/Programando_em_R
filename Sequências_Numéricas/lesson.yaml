@@ -117,11 +117,11 @@
   CorrectAnswer: rep(c(0, 1, 2), each = 10)
   AnswerTests: omnitest(correctExpr='rep(c(0, 1, 2), each = 10)')
   Hint: "Digite rep(c(0, 1, 2), each = 10) para ver como o argumento `each` (cada) na função rep() altera levemente sua conduta."
+  
 
 - Class: mult_question
-  Output: "Você gostaria de informar alguém de que esta lição foi completada com sucesso?"
-  CorrectAnswer: NULL
-  AnswerChoices: Sim; Não
-  AnswerTests: notify()
-  Hint: NULL
-  
+  Output: Voce quer enviar o log  dessa sessão?
+  AnswerChoices: Sim;Não
+  CorrectAnswer: Sim
+  AnswerTests: submit_log()
+  Hint: Type a hint.

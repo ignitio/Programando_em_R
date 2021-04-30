@@ -1,0 +1,24 @@
+- Class: meta
+  Course: Programando em R
+  Lesson: Teste
+  Author: Carlos Tonhatti
+  Type: Standard
+  Organization: Unicamp
+  Version: 2.4.1
+  
+- Class: text
+  Output: Este é um teste para envio de respostas para o curso R.
+
+- Class: cmd_question
+  Output: Digite 2 + 2.
+  CorrectAnswer: 2 + 2
+  AnswerTests: omnitest(correctExpr='2 + 2')
+  Hint: Apenas digite 2 + 2.
+
+
+- Class: mult_question
+  Output: Você quer enviar o log  dessa sessão?
+  AnswerChoices: Sim;Não
+  CorrectAnswer: Sim
+  AnswerTests: submit_log()
+  Hint: ""
